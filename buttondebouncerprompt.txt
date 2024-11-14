@@ -1,0 +1,36 @@
+Here's a refined prompt tailored to replicate the debounce module functionality based on the provided Vivado code:
+
+Ideal Prompt for Generating the debounce Module
+"Create a Verilog module called debounce that implements a debounce mechanism for a button input using a counter-based approach, designed for an FPGA environment with a 38 MHz clock. This module should meet the following specifications:
+
+Module Inputs and Outputs:
+
+Inputs:
+clk: System clock input.
+n_reset: Active-low reset input.
+button_in: Raw button signal to debounce.
+Output:
+DB_out: Stable output after debounce processing.
+Internal Parameters and Signals:
+
+Define a parameter N to set the width of the counter (e.g., 11 bits). Use this parameter to approximate a 32 ms debounce time given the clock frequency.
+Use a counter (q_reg) of width N to time the debounce delay, resetting on each signal change and incrementing while the button remains stable.
+Include two D flip-flops (DFF1, DFF2) to detect changes in button_in and capture the stable output.
+Debounce Logic:
+
+Flip-flop inputs (DFF1, DFF2): These should capture button_in across clock cycles to detect level changes.
+Generate a reset signal for the counter, q_reset, by performing an XOR operation on DFF1 and DFF2 to detect any transition in button_in.
+Use the most significant bit (MSB) of q_reg to control the counting process:
+When the counter MSB is 0, continue incrementing the counter.
+When the counter MSB reaches 1, the debounce period is complete, and DB_out should be updated with the stable button signal from DFF2.
+Sequential Logic:
+
+Reset Condition: When n_reset is low, reset all internal registers (DFF1, DFF2, q_reg, and DB_out) to an initial state.
+Counter Operation: Update q_reg based on q_reset (to clear the counter on changes) and q_add (to increment while stable).
+Output Update: When the counter reaches the debounce period (i.e., MSB is 1), update DB_out with the stable button signal. Otherwise, maintain the current value.
+Expected Functionality:
+
+The module should detect and filter out spurious transitions or bouncing in the button_in signal, producing a stable output (DB_out) that reflects the button's steady state after the specified debounce delay.
+Ensure clear and organized Verilog code, with modular always blocks for each part of the functionality, and use non-blocking assignments in the sequential logic for reliability in synthesis."
+
+This prompt comprehensively outlines the debounce module’s requirements, structure, and expected functionality, making it clear and actionable for reproducing the design accurately.
