@@ -1,0 +1,14 @@
+Key Adjustments for Vivado:
+Vivado Compatibility:
+
+Vivado synthesizes standard VHDL-2008, so the code is compatible with Vivado’s default VHDL settings. This code structure adheres to the Vivado requirements and should synthesize directly without modifications.
+Clock Divider for Multiplexing:
+
+The clk_div signal is used to slow down the clock for multiplexing the four digits, ensuring that the switching between digits happens at a rate visible as continuous to the human eye.
+Seven-Segment Pattern Function:
+
+The to_seven_seg function converts a 4-bit binary input to a seven-segment display pattern. Each digit has a unique pattern for display, and we’ve added patterns for numbers 0 through 9.
+Digit Multiplexing:
+
+The mux_select signal cycles through each of the four digits sequentially to display the input on each one. This results in multiplexed output on the seven-segment display, achieved through a 4-bit an output signal for each anode.
+This VHDL code is ready to be synthesized and implemented in Vivado for the Basys 3 board, where it should control the four-digit seven-segment display effectively.
